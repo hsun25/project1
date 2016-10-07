@@ -1,0 +1,105 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Join Us!</title>
+		<link rel="stylesheet" type="text/css" href="club-general.css">
+		<link rel="stylesheet" type="text/css" href="club-join.css">
+	</head>
+	
+	<body onload="checkCookie();">
+		<script type="text/javascript">
+			function setCookie(cname, cvalue) {
+				document.cookie = cname + "=" + cvalue + ";";
+			} 
+			function getCookie(cname) {
+				var name = cname + "=";
+				var ca = document.cookie.split(';');
+				for(var i = 0; i < ca.length; i++) {
+					var c = ca[i];
+					while (c.charAt(0) == ' ') {
+						c = c.substring(1);
+					}
+					if (c.indexOf(name) == 0) {
+						return c.substring(name.length, c.length);
+					}
+				}
+				return "";
+			}
+			function checkCookie() {
+				var username=getCookie("username");
+				console.log("username: " + username);
+				if (username!="" && username != null && username != undefined) {
+					var welcome = document.createTextNode("Welcome again " + username);  
+					var form = document.getElementById('form');
+					form.innerHTML = "";
+					var h2 = document.createElement("H2")     
+					form.appendChild(h2.appendChild(welcome));
+					form.style.textAlign = "center";
+					form.style.fontSize = "200%";
+					// alert("Welcome again " + username);
+				} else {
+					username=document.getElementById('input').value;
+					setCookie("username", username);
+					
+				}
+			} 
+			function changeCookie() {
+				username=document.getElementById('input').value;
+				setCookie("username", username);
+			}
+			function deleteCookie() {
+				document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC"; 
+				// alert(document.cookie);
+			}
+		</script>
+		<h1>Join Us</h1>
+		<table class="center" id="navbar">
+			<tr>
+				<th><a href="http://people.emich.edu/hsun3/fall16-231/project1/index.html">Home</a></th> 
+				<th><a href="http://people.emich.edu/hsun3/fall16-231/project1/about.html">About Us</a></th> 
+				<th><a href="http://people.emich.edu/hsun3/fall16-231/project1/join.html">Join Us</a></th> 
+				<th><a href="http://people.emich.edu/hsun3/fall16-231/project1/magikarp.html">Learn About Magikarps</a></th> 
+				<th><a href="http://people.emich.edu/hsun3/fall16-231/project1/sitemap.html">Sitemap</a></th>
+			</tr>
+		</table>
+		
+		<h2>Become A Karphead!</h2>
+		<p id="form">
+			Username: <input type="text" name="username" id="input"/><br />
+			Password: <input type="password" name="password"/><br />
+			First Name/Last Name: <input type="text" name="full_name"/><br />
+			E-mail: <input type="email" name="email"/><br />
+			Date of Birth: <input type="text" name="DoT"/><br />
+			Gender: <input type="radio" name="gender" value="male"> Male
+					<input type="radio" name="gender" value="female"> Female
+					<input type="radio" name="gender" value="other"> Other <br />
+			Requested Title: <input type="text" /><br />
+			Credit Card Number: <input type="text" /><br />
+			Favorite Type of Apple: 
+					<input type="radio" name="apple" value="fuji"> Fuji
+					<input type="radio" name="apple" value="g_smith"> Granny Smith
+					<input type="radio" name="apple" value="ios"> iOs <br />
+			<button onclick="changeCookie(); location.reload();">Submit</button>
+		</p>
+		<p><button onclick="deleteCookie(); location.reload();">Log Out</button></p>
+		<hr />
+		<hr />
+	</body>
+</html>
+
+<!--
+  - Register new users (join.html)
+    - a page holding a form for visitors to join
+    - must require a user to register with a valid
+      - username
+      - password
+      - first name/last name
+      - e-mail
+      - date of birth
+      - gender
+      - requested title
+      - Credit card number
+      - favorite type of apple (something in a select box)
+    - if the user is already logged in, the page says thanks for supporting
+-->
