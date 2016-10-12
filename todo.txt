@@ -1,0 +1,9 @@
+-add magikarp on top of current page? moves with mouse when highlighted
+-clean up code
+-comment out regex and project code
+https://css-tricks.com/snippets/css/flip-an-image/
+https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&cad=rja&uact=8&ved=0ahUKEwijubrYvNHPAhUFFT4KHQOeCk0QFggkMAE&url=https%3A%2F%2Fregexone.com%2F&usg=AFQjCNH7gKh4EgiQxtScFhiXvT9daGe-7g
+
+-practice regex
+-localstorage
+-explain my regex
