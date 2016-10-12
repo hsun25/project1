@@ -1,7 +1,8 @@
 <!doctype html>
 
-<html>
+<html lang="en">
 	<head>
+		<meta charset="utf-8" />
 		<title>Join Us!</title>
 		<link rel="stylesheet" type="text/css" href="club-general.css">
 		<link rel="stylesheet" type="text/css" href="club-join.css">
@@ -9,9 +10,12 @@
 	
 	<body onload="checkCookie();">
 		<script type="text/javascript">
+			//set a cookie with the given cookie name and value.
 			function setCookie(cname, cvalue) {
 				document.cookie = cname + "=" + cvalue + ";";
 			} 
+			
+			//get a cookie with the given cookie name
 			function getCookie(cname) {
 				var name = cname + "=";
 				var ca = document.cookie.split(';');
@@ -26,80 +30,75 @@
 				}
 				return "";
 			}
+			
+			//Checks if there is a cookie. If there is, display welcome message
+			//and logout button.
 			function checkCookie() {
 				var username=getCookie("username");
 				console.log("username: " + username);
 				if (username!="" && username != null && username != undefined) {
-					var welcome = document.createTextNode("Welcome again " + username);  
+					var welcome = document.createTextNode("Welcome again " + username + ".\n Thanks for supporting!");  
 					var form = document.getElementById('form');
 					form.innerHTML = "";
 					var h2 = document.createElement("H2")     
 					form.appendChild(h2.appendChild(welcome));
 					form.style.textAlign = "center";
 					form.style.fontSize = "200%";
-					// alert("Welcome again " + username);
-				} else {
-					username=document.getElementById('input').value;
-					setCookie("username", username);
-					
-				}
+					document.getElementById("logout").style.visibility = "visible";
+				} 
 			} 
+			
+			//changes the username cookie
 			function changeCookie() {
-				username=document.getElementById('input').value;
+				username=document.querySelector('input[name=username]').value;
 				setCookie("username", username);
 			}
+			
+			//deletes the username cookie
 			function deleteCookie() {
 				document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC"; 
-				// alert(document.cookie);
 			}
+			
 		</script>
-		<h1>Join Us</h1>
-		<table class="center" id="navbar">
-			<tr>
-				<th><a href="http://people.emich.edu/hsun3/fall16-231/project1/index.html">Home</a></th> 
-				<th><a href="http://people.emich.edu/hsun3/fall16-231/project1/about.html">About Us</a></th> 
-				<th><a href="http://people.emich.edu/hsun3/fall16-231/project1/join.html">Join Us</a></th> 
-				<th><a href="http://people.emich.edu/hsun3/fall16-231/project1/magikarp.html">Learn About Magikarps</a></th> 
-				<th><a href="http://people.emich.edu/hsun3/fall16-231/project1/sitemap.html">Sitemap</a></th>
-			</tr>
-		</table>
+		<h1 id="header">Join Us</h1>
+		<ul id="navbar">
+			<li><a href="index.html">Home</a></li> 
+			<li><a href="about.html">About Us</a></li> 
+			<li><a class="active" href="join.html">Join Us</a></li> 
+			<li><a href="magikarp.html">Learn About Magikarps</a></li> 
+			<li><a href="sitemap.html">Sitemap</a></li>
+		</ul>
 		
 		<h2>Become A Karphead!</h2>
-		<p id="form">
-			Username: <input type="text" name="username" id="input"/><br />
-			Password: <input type="password" name="password"/><br />
-			First Name/Last Name: <input type="text" name="full_name"/><br />
-			E-mail: <input type="email" name="email"/><br />
-			Date of Birth: <input type="text" name="DoT"/><br />
-			Gender: <input type="radio" name="gender" value="male"> Male
-					<input type="radio" name="gender" value="female"> Female
-					<input type="radio" name="gender" value="other"> Other <br />
-			Requested Title: <input type="text" /><br />
-			Credit Card Number: <input type="text" /><br />
+		<form onsubmit="changeCookie(); location.reload();" id="form" method="POST">
+			<!-- Username must start and end with a combination of 5 to 15 alphanumeric or
+				 underscore characters. -->
+			Username: <input type="text" name="username" id="input" placeholder="Alex09" pattern="^\w{5,15}$" required /><br />
+			<!-- Passwords must start with a lower- or uppercase letter, ending with 3 to 14 alphanumeric or
+				 underscore characters.  -->
+			Password: <input type="password" name="password" placeholder="w123_c" pattern="^[a-zA-Z](\w{3,14})$" /><br />
+			<!-- A valid name does not start with a number. A valid name has two combinations of one or more alphabet characters
+				 (not case sensitive) with a space in between.-->
+			First Name/Last Name: <input type="text" name="name" placeholder="John Smith" pattern="^[^0-9]([a-zA-z])+ ([a-zA-Z])+"/><br />
+			<!-- A valid email has one or more alphanumeric and underscore characters before an @ sign, followed by
+					 -->
+			E-mail: <input type="email" name="email" placeholder="example@gmail.com" pattern="^\w+@[a-zA-Z_]+?\.([a-zA-Z]{2,3})$"/><br />
+			<!-- A valid date of birth is in the form MM DD YYYY where the first letter of month cannot be more than 1. -->
+			Date of Birth: <input type="text" name="dob" placeholder="01 22 2016" pattern="^[0-1][0-9] [0-1][0-9] [0-2][0-9][0-9][0-9]$"/><br />
+			<!-- Gender is either Male, Female, or Other. -->
+			Gender: <input type="text" name="gender" placeholder="Male/Female/Other" pattern="Male|Female|Other"/><br />
+			<!-- Title is either Mrs., Mr., Dr., Professor, Ms., Miss, Lord, Lady, or Viscount.-->
+			Requested Title: <input type="text" name="title" placeholder="Mr./Mrs." pattern="Mrs.|Mr.|Dr.|Professor|Ms.|Miss|Lord|Lady|Viscount"/><br />
+			<!-- Credit card numbers are usually 16 characters except for some Visa cards, which can be 15. The spaces
+				 are there for easier input. -->
+			Credit Card Number: <input type="text" name="card" placeholder="1234 1234 1234 1234" pattern="([0-9][0-9][0-9][0-9] ){3}(([0-9][0-9][0-9][0-9])|([0-9][0-9][0-9]))" /><br />
 			Favorite Type of Apple: 
-					<input type="radio" name="apple" value="fuji"> Fuji
-					<input type="radio" name="apple" value="g_smith"> Granny Smith
-					<input type="radio" name="apple" value="ios"> iOs <br />
-			<button onclick="changeCookie(); location.reload();">Submit</button>
-		</p>
-		<p><button onclick="deleteCookie(); location.reload();">Log Out</button></p>
-		<hr />
-		<hr />
+					<input type="radio" name="apple" value="fuji"> <label>Fuji</label>
+					<input type="radio" name="apple" value="g_smith"> <label>Granny Smith</label>
+					<input type="radio" name="apple" value="ios"> <label>iOs</label> <br />
+			<button>Submit</button>
+		</form>
+		<p><button id="logout" onclick="deleteCookie(); location.reload();">Log Out</button></p>
+		<hr id="footer"/>
 	</body>
 </html>
-
-<!--
-  - Register new users (join.html)
-    - a page holding a form for visitors to join
-    - must require a user to register with a valid
-      - username
-      - password
-      - first name/last name
-      - e-mail
-      - date of birth
-      - gender
-      - requested title
-      - Credit card number
-      - favorite type of apple (something in a select box)
-    - if the user is already logged in, the page says thanks for supporting
--->
