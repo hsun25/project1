@@ -1,17 +1,10 @@
-:root {
-  --yellow: #f7d07c;
-  --brown: #a15648;
-  --red: #e95532;
-  --pink: #ff836a;
-}
-
 #events {
 	width: 50%;
 }
 
 #first_row {
-	background-color: var(--brown);
-	color: var(--yellow);
+	background-color: #a15648;;
+	color:  #f7d07c;
 }
 
 td {
@@ -19,5 +12,5 @@ td {
 }
 
 img {
-	border: 5px dotted var(--pink);
+	border: 5px dotted #ff836a;
 }

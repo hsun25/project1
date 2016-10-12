@@ -1,5 +1,9 @@
-p {
-	text-align: left; 
-	margin-left: 20px;
-	line-height: 200%;
+form {
+	text-align: left;
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
+#logout {
+	visibility: hidden;
 }
